@@ -6,31 +6,98 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Share Tech Mono', monospace;
-  background: linear-gradient(135deg, #0f0526 0%, #1a0b2e 20%, #2d0b3a 40%, #4a0b4a 60%, #7a0b7a 80%, #ff00cc 100%);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  background: 
+    linear-gradient(rgba(255, 0, 204, 0.15), rgba(255, 0, 204, 0.15)),
+    url('https://t3.ftcdn.net/jpg/05/68/81/90/360_F_568819014_klurj5HrbzNEkNV6iAljfqkmdHmCT81f.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   overflow: hidden;
+  position: relative;
+  animation: bgPulse 15s infinite alternate;
 }
 
-@keyframes gradient {
+@keyframes bgPulse {
   0% {
-    background-position: 0% 50%;
+    background-color: rgba(15, 5, 38, 0.7);
+  }
+  25% {
+    background-color: rgba(42, 11, 68, 0.7);
   }
   50% {
-    background-position: 100% 50%;
+    background-color: rgba(74, 11, 74, 0.7);
+  }
+  75% {
+    background-color: rgba(122, 11, 122, 0.7);
   }
   100% {
-    background-position: 0% 50%;
+    background-color: rgba(255, 0, 204, 0.7);
+  }
+}
+
+/* Efeito de sobreposição animada */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 0, 204, 0.1) 0%, 
+      rgba(51, 51, 255, 0.1) 50%, 
+      rgba(0, 255, 255, 0.1) 100%);
+  background-size: 200% 200%;
+  animation: gradientOverlay 12s ease infinite;
+  z-index: 0;
+}
+
+@keyframes gradientOverlay {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* Efeito de grid animado */
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 0, 204, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gridMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
   }
 }
 
 .card {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   border: 2px solid #ff00cc;
   border-radius: 12px;
   padding: 2rem;
@@ -40,6 +107,16 @@ body {
   position: relative;
   z-index: 1;
   backdrop-filter: blur(5px);
+  animation: cardGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes cardGlow {
+  0% {
+    box-shadow: 0 0 20px #ff00cc, 0 0 40px #3333ff;
+  }
+  100% {
+    box-shadow: 0 0 30px #ff00cc, 0 0 60px #3333ff, 0 0 80px #00ffff;
+  }
 }
 
 .card::before {
@@ -54,6 +131,7 @@ body {
   border-radius: 14px;
   animation: borderAnimation 4s linear infinite;
   background-size: 400% 400%;
+  opacity: 0.7;
 }
 
 @keyframes borderAnimation {
@@ -73,6 +151,16 @@ body {
   border: 3px solid #00ffff;
   box-shadow: 0 0 15px #00ffff;
   margin-bottom: 1rem;
+  animation: imgPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes imgPulse {
+  0% {
+    box-shadow: 0 0 15px #00ffff;
+  }
+  100% {
+    box-shadow: 0 0 30px #00ffff, 0 0 45px #ff00cc;
+  }
 }
 
 h2 {
@@ -81,12 +169,40 @@ h2 {
   color: #ff00cc;
   text-shadow: 0 0 5px #ff00cc;
   margin-bottom: 0.5rem;
+  animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 5px #ff00cc;
+  }
+  100% {
+    text-shadow: 0 0 15px #ff00cc, 0 0 20px #3333ff;
+  }
 }
 
 p {
   font-size: 1rem;
-  color: #ffffff;
+  color: #fff700; /* Amarelo Neon */
+  text-shadow: 0 0 5px #fff700, 
+               0 0 10px rgba(255, 247, 0, 0.8),
+               0 0 20px rgba(255, 247, 0, 0.4);
   margin-bottom: 1.5rem;
+  animation: yellowPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes yellowPulse {
+  0% {
+    opacity: 0.9;
+    text-shadow: 0 0 5px #fff700,
+                 0 0 10px rgba(255, 247, 0, 0.8);
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 15px #fff700,
+                 0 0 25px rgba(255, 247, 0, 0.9),
+                 0 0 35px rgba(255, 247, 0, 0.6);
+  }
 }
 
 .btn {
@@ -102,11 +218,22 @@ p {
   transition: transform 0.2s ease-in-out;
   position: relative;
   overflow: hidden;
+  animation: btnPulse 3s ease-in-out infinite;
+}
+
+@keyframes btnPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px #ff00cc;
+  }
+  50% {
+    box-shadow: 0 0 20px #ff00cc, 0 0 30px #3333ff;
+  }
 }
 
 .btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 20px #ff00cc, 0 0 30px #3333ff;
+  animation: none;
+  box-shadow: 0 0 25px #ff00cc, 0 0 40px #3333ff;
 }
 
 .btn::after {
@@ -134,32 +261,29 @@ p {
   }
 }
 
-/* Adicionando alguns elementos synthwave */
-body::before {
-  content: '';
+/* Efeitos de partículas neon */
+.neon-particle {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(255, 0, 204, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(51, 51, 255, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(0, 255, 255, 0.15) 0%, transparent 50%);
-  pointer-events: none;
+  background: #ff00cc;
+  border-radius: 50%;
+  filter: blur(1px);
+  animation: float 15s infinite linear;
+  z-index: 0;
 }
 
-/* Linhas de grade futuristas */
-body::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(255, 0, 204, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 0, 204, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  pointer-events: none;
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px);
+    opacity: 0;
+  }
 }
